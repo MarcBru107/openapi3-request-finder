@@ -1,0 +1,381 @@
+openapi: 3.0.1
+info:
+  version: 1.0.0
+  title: TestSwagger
+  description: |-
+    Only for test purpose
+tags:
+  - name: Deadpool
+    description: Endpoints for handling Deadpools
+  - name: GROOT
+    description: Endpoints for handling GROOTs
+paths:
+  /v1/deadpool:
+    post:
+      operationId: postDeadpoolTbd
+      description: >
+        Creates a new Deadpool. If the given Deadpool is already existing no update will be performaned but the request results in a http-status 400.
+      tags:
+        - Deadpool
+      parameters:
+        - $ref: '#/components/parameters/Accept'
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/x-protobuf:
+            schema:
+              $ref: '#/components/schemas/Deadpool'
+        required: true
+      responses:
+        '201':
+          content:
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/Deadpool'
+          description: |
+            Creation of Deadpool was successful.
+        '500':
+          $ref: '#/components/responses/500'
+
+    put:
+      operationId: putDeadpoolTbd
+      description: >
+        Updates provided Deadpool. If the provided Deadpool doesn't exist, yet, it'll be not created. The request will result in a http-status 404 instead.
+      tags:
+        - Deadpool
+      parameters:
+        - $ref: '#/components/parameters/Accept'
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/x-protobuf:
+            schema:
+              $ref: '#/components/schemas/Deadpool'
+        required: true
+      responses:
+        '200':
+          content:
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/Deadpool'
+          description: |
+            Updating the provided Deadpool was successful.
+        '500':
+          $ref: '#/components/responses/500'
+  /v1/Deadpools/{Deadpool}:
+    delete:
+      operationId: deleteDeadpoolTbd
+      description: >
+        Deletes given Deadpool. <br>
+
+        The deletion can cause the deletion of Deadpool related database entries like Subjects and/or Containers. Those deletions can
+        cause the deletion of Subject Configurations, too.
+      tags:
+        - Deadpool
+      parameters:
+        - name: Deadpool
+          in: path
+          description: Deadpool to be deleted
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Accept'
+      security:
+        - bearerAuth: []
+      responses:
+        '204':
+          description: Deletion of Deadpool was successful.
+        '500':
+          $ref: '#/components/responses/500'
+  /v1/Deadpools/search:
+    post:
+      operationId: postDeadpoolSearchTbd
+      description: >
+        Search for Deadpools.<br>
+
+        The result size can be limited with the parameters 'limit' and 'page'.
+        '0' value states that the parameter is deactivated.
+      tags:
+        - Deadpool
+      parameters:
+        - $ref: '#/components/parameters/Accept'
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/x-protobuf:
+            schema:
+              $ref: '#/components/schemas/DeadpoolSearch'
+        required: true
+      responses:
+        '200':
+          content:
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/Deadpools'
+          description: >
+            Request was processed successfully. Result will be returned in payload. If no results were found the payload will be empty.
+        '500':
+          $ref: '#/components/responses/500'
+  /v1/GROOTs:
+    post:
+      operationId: postGROOTTbd
+      description: >
+        Creates a new GROOT. If the given GROOT is already existing no update will be performaned but the request results in a http-status 400.
+      tags:
+        - GROOT
+      parameters:
+        - $ref: '#/components/parameters/Accept'
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/x-protobuf:
+            schema:
+              $ref: '#/components/schemas/GROOT'
+        required: true
+      responses:
+        '201':
+          content:
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/GROOT'
+          description: |
+            Creation of Application Configuration was successful.
+        '500':
+          $ref: '#/components/responses/500'
+    put:
+      operationId: putGROOTTbd
+      description: >
+        Updates provided GROOT. If the provided GROOT doesn't exist, yet, it'll be not created. The request will result in a http-status 404 instead.
+      tags:
+        - GROOT
+      parameters:
+        - $ref: '#/components/parameters/Accept'
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/x-protobuf:
+            schema:
+              $ref: '#/components/schemas/GROOT'
+        required: true
+      responses:
+        '200':
+          content:
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/GROOT'
+          description: |
+            Updating the provided GROOT was successful.
+        '500':
+          $ref: '#/components/responses/500'
+  /v1/GROOTs/{GROOT}:
+    delete:
+      operationId: deleteGROOTTbd
+      description: >
+        Deletes given GROOT. <br>
+
+        The deletion can cause the deletion of GROOT related database entries like Subjects and/or Containers. Those deletions can
+        cause the deletion of Subject Configurations, too.
+      tags:
+        - GROOT
+      parameters:
+        - name: GROOT
+          in: path
+          description: GROOT to be deleted
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Accept'
+      security:
+        - bearerAuth: []
+      responses:
+        '204':
+          description: Deletion of GROOT was successful.
+        '500':
+          $ref: '#/components/responses/500'
+  /v1/GROOTs/search:
+    post:
+      operationId: postGROOTSearchTbd
+      description: >
+        Search for GROOTs.<br>
+
+        The result size can be limited with the parameters 'limit' and 'page'.
+        '0' value states that the parameter is deactivated.
+      tags:
+        - GROOT
+      parameters:
+        - $ref: '#/components/parameters/Accept'
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/x-protobuf:
+            schema:
+              $ref: '#/components/schemas/GROOTSearch'
+        required: true
+      responses:
+        '200':
+          content:
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/GROOTs'
+          description: >
+            Request was processed successfully. Result will be returned in payload. If no results were found the payload will be empty.
+        '500':
+          $ref: '#/components/responses/500'
+  /isAlive:
+    get:
+      tags:
+        - Status API
+      summary: >-
+        The Module processAliveTest returns some basic information about the service
+      responses:
+        '200':
+          description: Success - isAlive page with detailed information is returned and displayed
+  /check:
+    get:
+      tags:
+        - Status API
+      summary: The Module checkTest returns some basic information about the service
+      responses:
+        '200':
+          description: Success - Health-Check page with detailed information is returned and displayed
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >
+        Access token retrieved from identity provider (Audi IDP). This token contains a lot of information where only some are relevant to this API. Only the relevant contents will be mentioned here. To get an overall view please refer to the specific documentation. Token must be provided using a header with following structure: <i>authorization: bearer 'token'</i><br>
+        <br>
+        The token is user specific and contains for example the user assigned ldap roles.These roles are used to check if the user is allowed to call this interface. If a user has unsufficient roles the request is declined with a http-status 403 (forbidden).<br>
+        <br>
+        To check the token validity its signature part is used (in combination with the public key of the identity provider). In addition
+        the issue and expiration timestamps are checked to validate if the token is neither expired nor not valid yet.
+
+  parameters:
+
+    Accept:
+      name: Accept
+      in: header
+      description: >-
+        Provide the supported response media type and version. See interface
+        examples, which media types are supported by a certain interface. In
+        case an interface does not return any payload, at least an error payload
+        must be accepted.
+        <br>**Example:** <br>
+        application/de.bruckm_v1+x-protobuf<br>
+        application/de.bruckm.genericError_v1_1_1+xml
+      required: true
+      schema:
+        type: string
+    Content-Type:
+      name: Content-Type
+      in: header
+      description: |
+        The media type of the response body
+        <br>**Example:** <br>
+        application/x-protobuf
+      required: true
+      schema:
+        type: string
+  responses:
+    '500':
+      content:
+        application/x-protobuf:
+          schema:
+            $ref: '#/components/schemas/errorsDefinition'
+      description: A server side error occurred when performing the request.
+  schemas:
+    Deadpool:
+      description: >
+        <h2>Protobuf Deadpool Message</h2>
+        <i>Please refer to complete protobuf definition for further
+        information.</i><br>
+        <br>
+        <code>
+        message Deadpool {<br>
+        &nbsp;&nbsp;   string Deadpool = 1;<br>
+        &nbsp;&nbsp;   google.protobuf.StringValue description = 2;<br>
+        }<br>
+        </code>
+    DeadpoolSearch:
+      description: >
+        <h2>Protobuf DeadpoolSearch Message</h2>
+        <i>Please refer to complete protobuf definition for further
+        information.</i><br>
+        <br>
+        <code>
+        message DeadpoolSearch {<br>
+        &nbsp;&nbsp;  // Please only fill in limit or page. In Case of both parameters the limit is used as a selection criterion.<br>
+        &nbsp;&nbsp; int32 limit = 1;<br>
+        &nbsp;&nbsp; common.Page page = 2;<br>
+        }<br>
+        </code>
+    GROOT:
+      description: >
+        <h2>Protobuf GROOT Message</h2>
+        <i>Please refer to complete protobuf definition for further
+        information.</i><br>
+        <br>
+        <code>
+        message GROOT {<br>
+        &nbsp;&nbsp;   string GROOT = 1;<br>
+        &nbsp;&nbsp;   google.protobuf.StringValue description = 2;<br>
+        }<br>
+        </code>
+    GROOTSearch:
+      description: >
+        <h2>Protobuf GROOTSearch Message</h2>
+        <i>Please refer to complete protobuf definition for further
+        information.</i><br>
+        <br>
+        <code>
+        message GROOTSearch {<br>
+        &nbsp;&nbsp;  // Please only fill in limit or page. In Case of both parameters the limit is used as a selection criterion.<br>
+        &nbsp;&nbsp; int32 limit = 1;<br>
+        &nbsp;&nbsp; common.Page page = 2;<br>
+        }<br>
+        </code>
+    Deadpools:
+      description: >
+        <h2>Protobuf Deadpools Message</h2>
+        <i>Please refer to complete protobuf definition for further information.</i><br>
+        <br>
+        <code>
+        message Deadpools {<br>
+        &nbsp;&nbsp; repeated Deadpool Deadpool = 1;<br>
+        }<br>
+        </code>
+    GROOTs:
+      description: >
+        <h2>Protobuf GROOTs Message</h2>
+        <i>Please refer to complete protobuf definition for further information.</i><br>
+        <br>
+        <code>
+        message GROOTs {<br>
+        &nbsp;&nbsp; repeated GROOT GROOT = 1;<br>
+        }<br>
+        </code>
+    errorsDefinition:
+      description: >
+        <h2>Protobuf Error Message</h2>
+        <i>Please refer to complete protobuf definition for further information.</i><br>
+        <br>
+        <code>
+        message Errors {<br>
+        &nbsp;&nbsp; repeated Error error = 1;<br>
+        }<br>
+        <br>
+        // message declaration<br>
+        message Error {<br>
+        &nbsp;&nbsp; string errorCode = 1;<br>
+        &nbsp;&nbsp; string detail = 2;<br>
+        }<br>
+        <br>
+        </code>
