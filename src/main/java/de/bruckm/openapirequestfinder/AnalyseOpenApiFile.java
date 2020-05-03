@@ -23,6 +23,7 @@ public class AnalyseOpenApiFile {
     private static final String CONTENT = "content";
     private static final String SCHEMA = "schema";
     private static final String TAGS = "tags";
+    private static final String YAML_URL_PATHS = "paths";
 
     final Yaml yaml = new Yaml();
     private final Map<String, Object> logConfigValueMap;
@@ -54,7 +55,7 @@ public class AnalyseOpenApiFile {
      */
     public HashMap<String, RequestsFromYaml> getRequestsMap(final String requestType) {
         final HashMap<String, RequestsFromYaml> responseMap = new LinkedHashMap<String, RequestsFromYaml>();
-        final LinkedHashMap<String, Object> pathMap = (LinkedHashMap<String, Object>) this.logConfigValueMap.get("paths");
+        final LinkedHashMap<String, Object> pathMap = (LinkedHashMap<String, Object>) this.logConfigValueMap.get(YAML_URL_PATHS);
         final Set<String> keys = pathMap.keySet();
         for (final String k : keys) {
             final LinkedHashMap<String, Object> pathMapEntry = (LinkedHashMap) pathMap.get(k);

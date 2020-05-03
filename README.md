@@ -13,4 +13,5 @@ Use de.bruckm.openapirequestfinder.AnalyseOpenApiFile:
     
 ## Dependencies:
     - org.yaml.snakeyaml
-    - junit-jupiter-api
+    - org.junit.jupiter.api
+    - org.slf4j.Logger
