@@ -5,9 +5,9 @@ info:
   description: |-
     Only for test purpose
 tags:
-  - name: Deadpool
+  - name: deadpoolservice
     description: Endpoints for handling Deadpools
-  - name: GROOT
+  - name: grootservice
     description: Endpoints for handling GROOTs
 paths:
   /v1/deadpool:
@@ -16,7 +16,7 @@ paths:
       description: >
         Creates a new Deadpool. If the given Deadpool is already existing no update will be performaned but the request results in a http-status 400.
       tags:
-        - Deadpool
+        - deadpoolservice
       parameters:
         - $ref: '#/components/parameters/Accept'
       security:
@@ -43,7 +43,7 @@ paths:
       description: >
         Updates provided Deadpool. If the provided Deadpool doesn't exist, yet, it'll be not created. The request will result in a http-status 404 instead.
       tags:
-        - Deadpool
+        - deadpoolservice
       parameters:
         - $ref: '#/components/parameters/Accept'
       security:
@@ -73,7 +73,7 @@ paths:
         The deletion can cause the deletion of Deadpool related database entries like Subjects and/or Containers. Those deletions can
         cause the deletion of Subject Configurations, too.
       tags:
-        - Deadpool
+        - deadpoolservice
       parameters:
         - name: Deadpool
           in: path
@@ -98,7 +98,7 @@ paths:
         The result size can be limited with the parameters 'limit' and 'page'.
         '0' value states that the parameter is deactivated.
       tags:
-        - Deadpool
+        - deadpoolservice
       parameters:
         - $ref: '#/components/parameters/Accept'
       security:
@@ -125,7 +125,7 @@ paths:
       description: >
         Creates a new GROOT. If the given GROOT is already existing no update will be performaned but the request results in a http-status 400.
       tags:
-        - GROOT
+        - grootservice
       parameters:
         - $ref: '#/components/parameters/Accept'
       security:
@@ -151,7 +151,7 @@ paths:
       description: >
         Updates provided GROOT. If the provided GROOT doesn't exist, yet, it'll be not created. The request will result in a http-status 404 instead.
       tags:
-        - GROOT
+        - grootservice
       parameters:
         - $ref: '#/components/parameters/Accept'
       security:
@@ -181,7 +181,7 @@ paths:
         The deletion can cause the deletion of GROOT related database entries like Subjects and/or Containers. Those deletions can
         cause the deletion of Subject Configurations, too.
       tags:
-        - GROOT
+        - grootservice
       parameters:
         - name: GROOT
           in: path
@@ -206,7 +206,7 @@ paths:
         The result size can be limited with the parameters 'limit' and 'page'.
         '0' value states that the parameter is deactivated.
       tags:
-        - GROOT
+        - grootservice
       parameters:
         - $ref: '#/components/parameters/Accept'
       security:

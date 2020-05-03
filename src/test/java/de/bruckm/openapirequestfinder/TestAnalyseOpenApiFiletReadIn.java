@@ -38,4 +38,23 @@ public class TestAnalyseOpenApiFiletReadIn {
         assertEquals(4, file.size());
     }
 
+    @Test
+    public void testWithInputStringGetProtobufRequest() {
+        final InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("ExampleSwagger.yaml");
+        final Reader targetReader = new InputStreamReader(inputStream);
+        final AnalyseOpenApiFile reader = new AnalyseOpenApiFile(targetReader);
+        final HashMap<String, RequestsFromYaml> requestMap = reader.getRequestsMap(APPLICATION_X_PROTOBUF);
+
+        // Test
+        assertNotNull(requestMap);
+        assertEquals(4, requestMap.size());
+
+        final RequestsFromYaml entry = requestMap.get("/v1/deadpool");
+        final String prefix = "de.bruckm.openapirequestfinder.proto.";
+        final String mainProtobufClass = (String) entry.getTags().get(0);
+
+        final Class<?> request = reader.getInnerRequestClass(entry, prefix, mainProtobufClass);
+        assertNotNull(request);
+    }
+
 }
