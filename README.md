@@ -17,3 +17,5 @@ Use de.bruckm.openapirequestfinder.AnalyseOpenApiFile:
     - org.yaml.snakeyaml
     - org.junit.jupiter.api
     - org.slf4j.Logger
+    - com.google.protobuf:protobuf-java
+    - com.googlecode.protobuf-java-format
