@@ -8,6 +8,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
 
 /**
@@ -21,8 +23,10 @@ public class AnalyseOpenApiFile {
     private static final String CONTENT = "content";
     private static final String SCHEMA = "schema";
     private static final String TAGS = "tags";
+
     final Yaml yaml = new Yaml();
     private final Map<String, Object> logConfigValueMap;
+    private static final Logger log = LoggerFactory.getLogger(AnalyseOpenApiFile.class);
 
     /**
      * Constructor
@@ -51,13 +55,12 @@ public class AnalyseOpenApiFile {
     public HashMap<String, RequestsFromYaml> getRequestsMap(final String requestType) {
         final HashMap<String, RequestsFromYaml> responseMap = new LinkedHashMap<String, RequestsFromYaml>();
         final LinkedHashMap<String, Object> pathMap = (LinkedHashMap<String, Object>) this.logConfigValueMap.get("paths");
-
         final Set<String> keys = pathMap.keySet();
         for (final String k : keys) {
             final LinkedHashMap<String, Object> pathMapEntry = (LinkedHashMap) pathMap.get(k);
             final Set<String> keysREST = pathMapEntry.keySet();
             for (final String httpMethod : keysREST) {
-                System.out.println(k + " " + httpMethod);
+                log.debug(k + " " + httpMethod);
                 final LinkedHashMap<String, Object> restEntry = (LinkedHashMap) pathMapEntry.get(httpMethod);
                 if (restEntry.containsKey(YAML_REQUEST_BODY_TAG)) {
                     final ArrayList tags = (ArrayList) restEntry.get(TAGS);
@@ -67,7 +70,7 @@ public class AnalyseOpenApiFile {
                         final LinkedHashMap typ = (LinkedHashMap) content.get(requestType);
                         final LinkedHashMap schema = (LinkedHashMap) typ.get(SCHEMA);
                         final Map.Entry<String, String> entry = (Map.Entry<String, String>) schema.entrySet().iterator().next();
-                        System.out.println(k + " " + httpMethod + " " + entry.getValue());
+                        log.debug(k + " " + httpMethod + " " + entry.getValue());
                         responseMap.put(k, this.createYamlFilterResponse(httpMethod, entry.getValue(), requestType, tags));
                     }
                 }
@@ -100,11 +103,12 @@ public class AnalyseOpenApiFile {
      * @param mainProtobufClass as described above, the protobuf request are implemented as inner classes
      * @return the inner-class of the request
      */
-    public Class<?> getSubRequestClass(final RequestsFromYaml entry, final String prefix, final String mainProtobufClass) {
+    public Class<?> getInnerRequestClass(final RequestsFromYaml entry, final String prefix, final String mainProtobufClass) {
         try {
             final String[] parts = entry.getNameResponseObject().split(YAML_PATH_TO_SCHEMAS);
             final String output = parts[1].substring(0, 1).toUpperCase() + parts[1].substring(1);
             final String pathToClass = prefix + mainProtobufClass + JAVA_SUBCLASS_PREFIX + output;
+            log.debug("pathToInnerClass: " + pathToClass);
             return Class.forName(pathToClass);
         } catch (final ClassNotFoundException e) {
             throw new IllegalArgumentException(e);
