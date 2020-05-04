@@ -7,7 +7,7 @@
 #### Helps you to get the request objects from a openapi-swagger-file   
 
 
-Use de.bruckm.openapirequestfinder.AnalyseOpenApiFile:
+Use de.bruckm.openapirequestfinder.OpenApiRequestFinder:
 - public HashMap<String, RequestsFromYaml> getRequestsMap(final String requestType)
      * Parse the open api input file for the requested request-type
      * @param requestType -> json,protobuf,..

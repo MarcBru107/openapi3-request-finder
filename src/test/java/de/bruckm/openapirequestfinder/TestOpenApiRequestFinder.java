@@ -11,16 +11,16 @@ import java.util.HashMap;
 import org.junit.jupiter.api.Test;
 
 /**
- * Test of AnalyseOpenApiFiletReadIn.java
+ * Test of OpenApiRequestFinder.java
  */
-public class TestAnalyseOpenApiFiletReadIn {
+public class TestOpenApiRequestFinder {
 
     private static final String APPLICATION_X_PROTOBUF = "application/x-protobuf";
 
     @Test
     public void testWithInputStream() {
         final InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("ExampleSwagger.yaml");
-        final AnalyseOpenApiFile reader = new AnalyseOpenApiFile(inputStream);
+        final OpenApiRequestFinder reader = new OpenApiRequestFinder(inputStream);
         final HashMap<String, RequestsFromYaml> file = reader.getRequestsMap(APPLICATION_X_PROTOBUF);
         assertNotNull(file);
 
@@ -31,7 +31,7 @@ public class TestAnalyseOpenApiFiletReadIn {
     public void testWithInputString() {
         final InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("ExampleSwagger.yaml");
         final Reader targetReader = new InputStreamReader(inputStream);
-        final AnalyseOpenApiFile reader = new AnalyseOpenApiFile(targetReader);
+        final OpenApiRequestFinder reader = new OpenApiRequestFinder(targetReader);
         final HashMap<String, RequestsFromYaml> file = reader.getRequestsMap(APPLICATION_X_PROTOBUF);
         assertNotNull(file);
 
@@ -42,7 +42,7 @@ public class TestAnalyseOpenApiFiletReadIn {
     public void testWithInputStringGetProtobufRequest() {
         final InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("ExampleSwagger.yaml");
         final Reader targetReader = new InputStreamReader(inputStream);
-        final AnalyseOpenApiFile reader = new AnalyseOpenApiFile(targetReader);
+        final OpenApiRequestFinder reader = new OpenApiRequestFinder(targetReader);
         final HashMap<String, RequestsFromYaml> requestMap = reader.getRequestsMap(APPLICATION_X_PROTOBUF);
 
         // Test

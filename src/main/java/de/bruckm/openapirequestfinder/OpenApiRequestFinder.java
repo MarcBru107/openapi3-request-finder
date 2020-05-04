@@ -13,9 +13,9 @@ import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
 
 /**
- * AnalyseOpenApiFile.java
+ * OpenApiRequestFinder.java
  */
-public class AnalyseOpenApiFile {
+public class OpenApiRequestFinder {
 
     private static final String YAML_PATH_TO_SCHEMAS = "#/components/schemas/";
     private static final String JAVA_SUBCLASS_PREFIX = "$";
@@ -27,14 +27,14 @@ public class AnalyseOpenApiFile {
 
     final Yaml yaml = new Yaml();
     private final Map<String, Object> logConfigValueMap;
-    private static final Logger log = LoggerFactory.getLogger(AnalyseOpenApiFile.class);
+    private static final Logger log = LoggerFactory.getLogger(OpenApiRequestFinder.class);
 
     /**
      * Constructor
      *
      * @param yamlInputStream
      */
-    public AnalyseOpenApiFile(final InputStream yamlInputStream) {
+    public OpenApiRequestFinder(final InputStream yamlInputStream) {
         this.logConfigValueMap = (Map<String, Object>) this.yaml.load(yamlInputStream);
     }
 
@@ -43,7 +43,7 @@ public class AnalyseOpenApiFile {
      *
      * @param targetReader
      */
-    public AnalyseOpenApiFile(final Reader targetReader) {
+    public OpenApiRequestFinder(final Reader targetReader) {
         this.logConfigValueMap = (Map<String, Object>) this.yaml.load(targetReader);
     }
 
