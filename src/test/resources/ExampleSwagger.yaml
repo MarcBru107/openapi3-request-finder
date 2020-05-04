@@ -250,16 +250,8 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      description: >
-        Access token retrieved from identity provider (Audi IDP). This token contains a lot of information where only some are relevant to this API. Only the relevant contents will be mentioned here. To get an overall view please refer to the specific documentation. Token must be provided using a header with following structure: <i>authorization: bearer 'token'</i><br>
-        <br>
-        The token is user specific and contains for example the user assigned ldap roles.These roles are used to check if the user is allowed to call this interface. If a user has unsufficient roles the request is declined with a http-status 403 (forbidden).<br>
-        <br>
-        To check the token validity its signature part is used (in combination with the public key of the identity provider). In addition
-        the issue and expiration timestamps are checked to validate if the token is neither expired nor not valid yet.
 
   parameters:
-
     Accept:
       name: Accept
       in: header
