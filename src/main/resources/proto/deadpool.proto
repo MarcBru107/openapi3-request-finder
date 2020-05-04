@@ -19,7 +19,7 @@ message Deadpools {
     repeated Deadpool deadpool = 1;
 }
 
-message TenantSearch {
+message DeadpoolSearch {
     Page page = 1;
 }
 
